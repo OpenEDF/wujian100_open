@@ -321,12 +321,12 @@ virtual_counter  x_virtual_counter ();
 initial
 begin
    $display("######time:%d, Dump start######",$time);
-////Dump fsdb should set $g_novas_pli in run_case
-//   $fsdbDumpfile("vg_dump.fsdb");
-//   $fsdbDumpon;
-//   $fsdbDumpvars();
-   $dumpfile("test.vcd");
-   $dumpvars;
+//Dump fsdb should set $g_novas_pli in run_case
+   $fsdbDumpfile("vg_dump.fsdb");
+   $fsdbDumpon;
+   $fsdbDumpvars();
+//   $dumpfile("test.vcd");
+//   $dumpvars;
 end
 `endif
 

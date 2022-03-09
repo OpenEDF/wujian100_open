@@ -56,14 +56,10 @@ if(!&GetOptions
 	exit(1);
 }
 
-
 if($Opt{'h'}) {
 	&print_usage();
 	exit(1);
 }
-
-
-
 
 my $s_vcs = 0;
 my $s_iverilog = 0;
@@ -77,13 +73,10 @@ if(!$s_vcs && !$s_iverilog){
 	exit(1);
 }
 
-
-
 my $dump_sim = "";
 if(defined($Opt{'nodump'})){
 	$dump_sim = "+define+NO_DUMP";
 }
-
 
 my $s_nomnt = 0;
 if(defined($Opt{'nomnt'})){
@@ -101,7 +94,6 @@ my $mad = 1;
 
 my $cpu_model_make;
 my $dahb_lite = 0;
-
 
 if("$cpu_model" eq "e902"){
 	my $temp_line;
@@ -130,7 +122,6 @@ foreach(@ARGV){
 		chomp($path = `pwd`);
 	}
 
-
 	if($case =~ /(.*)\.s/){
 		$case_make = $1;
 		!system("cp $case_file $wujian100_open_PATH/workdir") or die "can't copy $case_file";
@@ -142,7 +133,6 @@ foreach(@ARGV){
 			!system("cp $case_file $wujian100_open_PATH/workdir") or die "can't copy $case_file";
 		}
 	}
-
 
 	if($case =~ /(.*)\.c/){
 		$case_make = $1;
@@ -173,7 +163,6 @@ foreach(@ARGV){
 }
 print "\nStep2 (Process the command line arguments) is finished!\n";
 
-
 chdir($work);
 $_ = $cpu_model;
 
@@ -197,18 +186,15 @@ else{
 }
 !system("sed -i 's/DATA_BADDR/0x$data_addr/g' linker.lcf") or die "cant't replace";
 
-
 !system("touch run_case.report") or die "can't touch";
 `printf "NOT RUN">run_case.report`;
 
 !system("mkdir ../regress/regress_result");
 !system("cp run_case.report ../regress/regress_result/$case_make\.report") or die "can't copy";
 
-
 !system("make clean; make all CPU=$cpu_model_make ENDIAN_MODE=little-endian FILE=$case_make HGPR=$hgpr") or die "can't make";
 print "make clean; make all CPU=$cpu_model_make ENDIAN_MODE=little-endian FILE=$case_make HGPR=$hgpr\n";
 print "\nStep3 (Make) is finished!\n";
-
 
 my $g_vlib_path;
 {
@@ -227,16 +213,12 @@ my $vcs_incdir = " +incdir+../workdir"
 		        ."+../soc/params"
                         ."+../tb";
 
-my  $g_novas_pli;
-my  $PLItab;
+my $g_novas_pli = "/home/macro/synopsys/verdi_2018/verdi/Verdi_O-2018.09-SP2/share/PLI/VCS/LINUX64/pli.a -load libnovas.so:FSDBDumpCmd ";
+my $PLItab = "-P /home/macro/synopsys/verdi_2018/verdi/Verdi_O-2018.09-SP2/share/PLI/VCS/LINUX64/novas.tab ";
+my $top_mod = "$wujian100_open_PATH/tb/tb.v ";
 
-
-
-my $top_mod;
-
-  $top_mod = "$wujian100_open_PATH/tb/tb.v ";
 if($s_vcs) {
-	!system("vcs +v2k -Mupdate -sverilog   $mnt_sim $dump_sim +nospecify +notimingchecks -timescale=1ns/100ps  $top_mod   $wujian100_open_PATH/workdir/$had_v $vcs_incdir $g_vlib_path  $PLItab  ") or die "can't run VCS";}
+	!system("vcs -full64 +v2k -Mupdate -sverilog $mnt_sim $dump_sim +nospecify +notimingchecks -timescale=1ns/100ps -debug_access+all -debug_acc+dmptf -debug_region+cell+encrypt -cc gcc-4.8 -cpp g++-4.8 -LDFLAGS -Wl,--no-as-needed $top_mod $wujian100_open_PATH/workdir/$had_v $vcs_incdir $g_vlib_path $PLItab $g_novas_pli ") or die "can't run VCS";}
 elsif($s_iverilog){
 	!system("iverilog -o test.vvp -Diverilog=1 -g2012 ../tb/busmnt.v  ../tb/tb.v ../tb/virtual_counter.v -f ../soc/wujian100_open_syn_for_iverilog.filelist -f ../soc/wujian100_open_lib_for_iverilog.filelist $wujian100_open_PATH/workdir/$had_v") or die "can't run iverilog";
         !system("vvp test.vvp") or die "can't run vvp";
@@ -248,7 +230,8 @@ print "\nStep4 (Run simulation) is finished\n";
 
 !system("cp run_case.report ../regress/regress_result/$case_make\.report") or die "can't copy";
 
-
+#print "\nStep5 Start simulation use verdi.\n";
+#system("verdi -2001 -sv -f ../tb/tb_file.list -top wujian100_open_tb -ssf vg_dump.fsdb -nologo") or die "can't start verdi";
 
 sub print_usage {
 	print << "UseOfrun_case";

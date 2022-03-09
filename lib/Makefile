@@ -23,7 +23,6 @@ CSRC = $(wildcard *.c)
 
 OBJECTS = $(SSRC:%.S=%.o) $(sSRC:%.s=%.o) $(CSRC:%.c=%.o)
 
-
 DEFSYM = $(shell echo ${CPU} | sed 's/\(e9[0-9]\{2\}\).*/\1/')
 CPU_M = $(shell echo ${CPU} | sed '/m/p')
 
@@ -66,25 +65,26 @@ ${FILE}.elf : ${OBJECTS} linker.lcf
 ${FILE}.obj : ${FILE}.elf
 	${OBJDUMP} ${OBJDUMPFLAGS} $< > $@
 
-
 ${FILE}.hex : ${FILE}.elf
 	${OBJCOPY} ${HEXFLAGS} $< $@ 
-
 
 %.pat	: %.hex
 	rm -f *.pat
 	#${CONVERT} $< test.pat
 	${CONVERT} -i $< -o test.pat
 
-
 #--------------------------------------------------------------------
 # target setting
 .PHONY :all
 all : ${FILE}.pat ${FILE}.hex ${FILE}.elf ${FILE}.obj
 
+.PHONY :vdebug
+vdebug:
+	verdi -2001 -sv -f ../tb/tb_file.list -top wujian100_open_tb -ssf vg_dump.fsdb -nologo
+
 #---------------------------------------------------------------------
 # clean some medium code and .pat
 .PHONY :clean 
 clean:
-	rm -rf *.o *.pat *.elf *.obj *.hex
+	rm -rf *.o *.pat *.elf *.obj *.hex *.o csrc simv simv.daidir verdiLog
 

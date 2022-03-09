@@ -1,11 +1,7 @@
-#Copyright (c) 2019 Alibaba Group Holding Limited
-#
-#Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-#
-#The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-#
-#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
+#--  Synopsys, Inc.
+#--  Version N-2018.03-SP1
+#--  Project file /home/macro/github/wujian100_open/fpga/synplify/wujian100_open_200t_3b.prj
+#--  Written on Wed Mar  9 00:02:11 2022
 
 
 #project files
@@ -47,6 +43,7 @@ add_file -verilog "../../soc/sim_lib/PAD_OSC_IO.v"
 add_file -verilog "../../soc/sim_lib/fpga_byte_spram.v"
 add_file -verilog "../../soc/sim_lib/fpga_spram.v"
 add_file -constraint "wujian100_open.sdc"
+add_file -fpga_constraint "FDC_constraints/wujian100_open_200t_3b_rev/wujian100_open_200t_3b_translated.fdc"
 
 
 
@@ -58,6 +55,9 @@ impl -add wujian100_open_200t_3b_rev -type fpga
 
 set_option -vlog_std v2001
 set_option -project_relative_includes 1
+
+#set constraint files
+set_option -constraint -clear
 set_option -include_path {../../soc/params/}
 
 #device options
@@ -71,16 +71,22 @@ set_option -part_companion ""
 set_option -use_fsm_explorer 0
 set_option -top_module "wujian100_open_top"
 
-# mapper_options
+# hdl_compiler_options
+set_option -distributed_compile 0
+
+# mapper_without_write_options
 set_option -frequency auto
+set_option -srs_instrumentation 1
+
+# mapper_options
 set_option -write_verilog 1
 set_option -write_vhdl 0
-set_option -srs_instrumentation 1
 
 # xilinx_options
 set_option -rw_check_on_ram 1
 set_option -reporting_ctd slack
 set_option -dw_minpower 1
+set_option -optimize_ngc 1
 
 # Xilinx Virtex2
 set_option -run_prop_extract 1
@@ -117,6 +123,4 @@ set_option -write_apr_constraint 1
 
 #set result format/file last
 project -result_file "wujian100_open_200t_3b_rev/wujian100_open.edf"
-
-#design plan options
 impl -active "wujian100_open_200t_3b_rev"
