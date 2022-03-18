@@ -3,7 +3,6 @@
 #--  Project file /home/macro/github/wujian100_open/fpga/synplify/wujian100_open_200t_3b.prj
 #--  Written on Wed Mar  9 00:02:11 2022
 
-
 #project files
 add_file -verilog "../wujian100_open_fpga_top.v"
 add_file -verilog "../../soc/ahb_matrix_top.v"
@@ -43,9 +42,9 @@ add_file -verilog "../../soc/sim_lib/PAD_OSC_IO.v"
 add_file -verilog "../../soc/sim_lib/fpga_byte_spram.v"
 add_file -verilog "../../soc/sim_lib/fpga_spram.v"
 add_file -constraint "wujian100_open.sdc"
-add_file -fpga_constraint "FDC_constraints/wujian100_open_200t_3b_rev/wujian100_open_200t_3b_translated.fdc"
 
-
+# synplify
+sdc2fdc
 
 #implementation: "wujian100_open_200t_3b_rev"
 impl -add wujian100_open_200t_3b_rev -type fpga

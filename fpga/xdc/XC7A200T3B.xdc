@@ -26,11 +26,11 @@ set_property IOSTANDARD LVCMOS33 [get_ports]
 #===========================================
 # Global clock and reset source
 #===========================================
-set_property PACKAGE_PIN B17   [get_ports PIN_EHS];     # 20 MHz
-#set_property PACKAGE_PIN E19   [get_ports OSC_CLK_48M]     # 48 MHz
-set_property PACKAGE_PIN W11   [get_ports PAD_MCURST];         # K1
-#set_property PACKAGE_PIN Y11   [get_ports {gpio0_port[0]}];         # K2
-set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets PAD_JTAG_TCLK_c]
+set_property PACKAGE_PIN B17   [get_ports PIN_EHS];          # 20 MHz
+#set_property PACKAGE_PIN E19   [get_ports OSC_CLK_48M]      # 48 MHz
+set_property PACKAGE_PIN W11   [get_ports PAD_MCURST];       # K1
+#set_property PACKAGE_PIN Y11   [get_ports {gpio0_port[0]}]; # K2
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets PAD_JTAG_TCLK]
 
 #===========================================
 # C-SKY  JTAG interface: J8
