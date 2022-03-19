@@ -1,39 +1,9 @@
 /*
 Copyright (c) 2019 Alibaba Group Holding Limited
-
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 `define FPGA
 
 module wujian100_open_top(
@@ -101,11 +71,8 @@ module wujian100_open_top(
   POUT_EHS
 );
 
-
 input           PIN_EHS;               
-
 output          POUT_EHS;              
-
 inout           PAD_GPIO_0;            
 inout           PAD_GPIO_1;            
 inout           PAD_GPIO_10;           
@@ -166,10 +133,6 @@ inout           PAD_USI2_NSS;
 inout           PAD_USI2_SCLK;         
 inout           PAD_USI2_SD0;          
 inout           PAD_USI2_SD1;          
-
-
-
-
 wire            PAD_GPIO_0;            
 wire            PAD_GPIO_1;            
 wire            PAD_GPIO_10;           
@@ -231,9 +194,7 @@ wire            PAD_USI2_SCLK;
 wire            PAD_USI2_SD0;          
 wire            PAD_USI2_SD1;          
 wire            PIN_EHS;               
-
 wire            POUT_EHS;              
-
 wire            apb0_dummy1_intr;      
 wire            apb0_dummy2_intr;      
 wire            apb0_dummy3_intr;      
@@ -581,8 +542,6 @@ wire            usi2_wic_intr;
 wire            wdt_pmu_rst_b;         
 wire            wdt_wic_intr;          
 
-
-
 aou_top  x_aou_top (
   .apb1_gpio_psel_s5     (apb1_gpio_psel_s5    ),
   .apb1_pmu_psel_s15     (apb1_pmu_psel_s15    ),
@@ -715,8 +674,6 @@ aou_top  x_aou_top (
   .test_mode             (test_mode            ),
   .wdt_pmu_rst_b         (wdt_pmu_rst_b        )
 );
-
-
 
 pdu_top  x_pdu_top (
   .apb0_dummy1_intr      (apb0_dummy1_intr     ),
@@ -1022,8 +979,6 @@ pdu_top  x_pdu_top (
   .wdt_wic_intr          (wdt_wic_intr         )
 );
 
-
-
 core_top  x_cpu_top (
   .apb0_dummy1_intr      (apb0_dummy1_intr     ),
   .apb0_dummy2_intr      (apb0_dummy2_intr     ),
@@ -1115,8 +1070,6 @@ core_top  x_cpu_top (
   .wdt_wic_intr          (wdt_wic_intr         )
 );
 
-
-
 retu_top  x_retu_top (
   .hmain0_ismc_s0_haddr  (hmain0_ismc_s0_haddr ),
   .hmain0_ismc_s0_hprot  (hmain0_ismc_s0_hprot ),
@@ -1162,8 +1115,6 @@ retu_top  x_retu_top (
   .smc_hmain0_s4_hresp   (smc_hmain0_s4_hresp  )
 );
 
-
-
 PAD_OSC_IO  x_PAD_EHS (
   .CLK         (ehs_pmu_clk),
   .EN          (1'b1       ),
@@ -1171,28 +1122,7 @@ PAD_OSC_IO  x_PAD_EHS (
   .XOSC_OUT    (POUT_EHS   )
 );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 assign els_pmu_clk = ehs_pmu_clk;
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_MCURST (
   .ID           (pad_mcurst_b),
@@ -1202,16 +1132,8 @@ PAD_DIG_IO  x_PAD_MCURST (
   .PAD          (PAD_MCURST  )
 );
 
-
-
-
-
-
-
-
 assign cpu_padmux_jtg_tms_oen = ~cpu_padmux_jtg_tms_oe;
 assign cpu_padmux_jtg_tms_ien = cpu_padmux_jtg_tms_oe;
-
 
 PAD_DIG_IO  x_PAD_JTAG_TMS (
   .ID                     (padmux_cpu_jtg_tms_i  ),
@@ -1221,16 +1143,6 @@ PAD_DIG_IO  x_PAD_JTAG_TMS (
   .PAD                    (PAD_JTAG_TMS          )
 );
 
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_JTAG_TCLK (
   .ID                  (padmux_cpu_jtg_tclk),
   .IEN                 (1'b0               ),
@@ -1238,17 +1150,6 @@ PAD_DIG_IO  x_PAD_JTAG_TCLK (
   .OEN                 (1'b1               ),
   .PAD                 (PAD_JTAG_TCLK      )
 );
-
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_GPIO_0 (
   .ID                      (ioctl_gpio_ext_porta[0]),
@@ -1258,14 +1159,6 @@ PAD_DIG_IO  x_PAD_GPIO_0 (
   .PAD                     (PAD_GPIO_0             )
 );
 
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_GPIO_1 (
   .ID                      (ioctl_gpio_ext_porta[1]),
   .IEN                     (pad_gpio_ien[1]        ),
@@ -1273,16 +1166,6 @@ PAD_DIG_IO  x_PAD_GPIO_1 (
   .OEN                     (pad_gpio_oen[1]        ),
   .PAD                     (PAD_GPIO_1             )
 );
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_GPIO_2 (
   .ID                      (ioctl_gpio_ext_porta[2]),
@@ -1292,16 +1175,6 @@ PAD_DIG_IO  x_PAD_GPIO_2 (
   .PAD                     (PAD_GPIO_2             )
 );
 
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_GPIO_3 (
   .ID                      (ioctl_gpio_ext_porta[3]),
   .IEN                     (pad_gpio_ien[3]        ),
@@ -1310,16 +1183,6 @@ PAD_DIG_IO  x_PAD_GPIO_3 (
   .PAD                     (PAD_GPIO_3             )
 );
 
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_GPIO_4 (
   .ID                      (ioctl_gpio_ext_porta[4]),
   .IEN                     (pad_gpio_ien[4]        ),
@@ -1327,17 +1190,6 @@ PAD_DIG_IO  x_PAD_GPIO_4 (
   .OEN                     (pad_gpio_oen[4]        ),
   .PAD                     (PAD_GPIO_4             )
 );
-
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_GPIO_5 (
   .ID                      (ioctl_gpio_ext_porta[5]),
   .IEN                     (pad_gpio_ien[5]        ),
@@ -1345,16 +1197,6 @@ PAD_DIG_IO  x_PAD_GPIO_5 (
   .OEN                     (pad_gpio_oen[5]        ),
   .PAD                     (PAD_GPIO_5             )
 );
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_GPIO_6 (
   .ID                      (ioctl_gpio_ext_porta[6]),
@@ -1364,16 +1206,6 @@ PAD_DIG_IO  x_PAD_GPIO_6 (
   .PAD                     (PAD_GPIO_6             )
 );
 
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_GPIO_7 (
   .ID                      (ioctl_gpio_ext_porta[7]),
   .IEN                     (pad_gpio_ien[7]        ),
@@ -1381,16 +1213,6 @@ PAD_DIG_IO  x_PAD_GPIO_7 (
   .OEN                     (pad_gpio_oen[7]        ),
   .PAD                     (PAD_GPIO_7             )
 );
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_GPIO_8 (
   .ID                      (ioctl_gpio_ext_porta[8]),
@@ -1400,16 +1222,6 @@ PAD_DIG_IO  x_PAD_GPIO_8 (
   .PAD                     (PAD_GPIO_8             )
 );
 
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_GPIO_9 (
   .ID                      (ioctl_gpio_ext_porta[9]),
   .IEN                     (pad_gpio_ien[9]        ),
@@ -1417,16 +1229,6 @@ PAD_DIG_IO  x_PAD_GPIO_9 (
   .OEN                     (pad_gpio_oen[9]        ),
   .PAD                     (PAD_GPIO_9             )
 );
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_GPIO_10 (
   .ID                       (ioctl_gpio_ext_porta[10]),
@@ -1436,14 +1238,6 @@ PAD_DIG_IO  x_PAD_GPIO_10 (
   .PAD                      (PAD_GPIO_10             )
 );
 
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_GPIO_11 (
   .ID                       (ioctl_gpio_ext_porta[11]),
   .IEN                      (pad_gpio_ien[11]        ),
@@ -1451,16 +1245,6 @@ PAD_DIG_IO  x_PAD_GPIO_11 (
   .OEN                      (pad_gpio_oen[11]        ),
   .PAD                      (PAD_GPIO_11             )
 );
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_GPIO_12 (
   .ID                       (ioctl_gpio_ext_porta[12]),
@@ -1470,16 +1254,6 @@ PAD_DIG_IO  x_PAD_GPIO_12 (
   .PAD                      (PAD_GPIO_12             )
 );
 
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_GPIO_13 (
   .ID                       (ioctl_gpio_ext_porta[13]),
   .IEN                      (pad_gpio_ien[13]        ),
@@ -1487,16 +1261,6 @@ PAD_DIG_IO  x_PAD_GPIO_13 (
   .OEN                      (pad_gpio_oen[13]        ),
   .PAD                      (PAD_GPIO_13             )
 );
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_GPIO_14 (
   .ID                       (ioctl_gpio_ext_porta[14]),
@@ -1506,16 +1270,6 @@ PAD_DIG_IO  x_PAD_GPIO_14 (
   .PAD                      (PAD_GPIO_14             )
 );
 
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_GPIO_15 (
   .ID                       (ioctl_gpio_ext_porta[15]),
   .IEN                      (pad_gpio_ien[15]        ),
@@ -1523,16 +1277,6 @@ PAD_DIG_IO  x_PAD_GPIO_15 (
   .OEN                      (pad_gpio_oen[15]        ),
   .PAD                      (PAD_GPIO_15             )
 );
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_GPIO_16 (
   .ID                       (ioctl_gpio_ext_porta[16]),
@@ -1542,16 +1286,6 @@ PAD_DIG_IO  x_PAD_GPIO_16 (
   .PAD                      (PAD_GPIO_16             )
 );
 
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_GPIO_17 (
   .ID                       (ioctl_gpio_ext_porta[17]),
   .IEN                      (pad_gpio_ien[17]        ),
@@ -1559,16 +1293,6 @@ PAD_DIG_IO  x_PAD_GPIO_17 (
   .OEN                      (pad_gpio_oen[17]        ),
   .PAD                      (PAD_GPIO_17             )
 );
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_GPIO_18 (
   .ID                       (ioctl_gpio_ext_porta[18]),
@@ -1578,16 +1302,6 @@ PAD_DIG_IO  x_PAD_GPIO_18 (
   .PAD                      (PAD_GPIO_18             )
 );
 
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_GPIO_19 (
   .ID                       (ioctl_gpio_ext_porta[19]),
   .IEN                      (pad_gpio_ien[19]        ),
@@ -1595,18 +1309,6 @@ PAD_DIG_IO  x_PAD_GPIO_19 (
   .OEN                      (pad_gpio_oen[19]        ),
   .PAD                      (PAD_GPIO_19             )
 );
-
-
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_GPIO_20 (
   .ID                       (ioctl_gpio_ext_porta[20]),
@@ -1616,14 +1318,6 @@ PAD_DIG_IO  x_PAD_GPIO_20 (
   .PAD                      (PAD_GPIO_20             )
 );
 
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_GPIO_21 (
   .ID                       (ioctl_gpio_ext_porta[21]),
   .IEN                      (pad_gpio_ien[21]        ),
@@ -1631,16 +1325,6 @@ PAD_DIG_IO  x_PAD_GPIO_21 (
   .OEN                      (pad_gpio_oen[21]        ),
   .PAD                      (PAD_GPIO_21             )
 );
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_GPIO_22 (
   .ID                       (ioctl_gpio_ext_porta[22]),
@@ -1650,16 +1334,6 @@ PAD_DIG_IO  x_PAD_GPIO_22 (
   .PAD                      (PAD_GPIO_22             )
 );
 
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_GPIO_23 (
   .ID                       (ioctl_gpio_ext_porta[23]),
   .IEN                      (pad_gpio_ien[23]        ),
@@ -1667,16 +1341,6 @@ PAD_DIG_IO  x_PAD_GPIO_23 (
   .OEN                      (pad_gpio_oen[23]        ),
   .PAD                      (PAD_GPIO_23             )
 );
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_GPIO_24 (
   .ID                       (ioctl_gpio_ext_porta[24]),
@@ -1686,16 +1350,6 @@ PAD_DIG_IO  x_PAD_GPIO_24 (
   .PAD                      (PAD_GPIO_24             )
 );
 
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_GPIO_25 (
   .ID                       (ioctl_gpio_ext_porta[25]),
   .IEN                      (pad_gpio_ien[25]        ),
@@ -1703,16 +1357,6 @@ PAD_DIG_IO  x_PAD_GPIO_25 (
   .OEN                      (pad_gpio_oen[25]        ),
   .PAD                      (PAD_GPIO_25             )
 );
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_GPIO_26 (
   .ID                       (ioctl_gpio_ext_porta[26]),
@@ -1722,16 +1366,6 @@ PAD_DIG_IO  x_PAD_GPIO_26 (
   .PAD                      (PAD_GPIO_26             )
 );
 
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_GPIO_27 (
   .ID                       (ioctl_gpio_ext_porta[27]),
   .IEN                      (pad_gpio_ien[27]        ),
@@ -1739,16 +1373,6 @@ PAD_DIG_IO  x_PAD_GPIO_27 (
   .OEN                      (pad_gpio_oen[27]        ),
   .PAD                      (PAD_GPIO_27             )
 );
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_GPIO_28 (
   .ID                       (ioctl_gpio_ext_porta[28]),
@@ -1758,16 +1382,6 @@ PAD_DIG_IO  x_PAD_GPIO_28 (
   .PAD                      (PAD_GPIO_28             )
 );
 
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_GPIO_29 (
   .ID                       (ioctl_gpio_ext_porta[29]),
   .IEN                      (pad_gpio_ien[29]        ),
@@ -1775,16 +1389,6 @@ PAD_DIG_IO  x_PAD_GPIO_29 (
   .OEN                      (pad_gpio_oen[29]        ),
   .PAD                      (PAD_GPIO_29             )
 );
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_GPIO_30 (
   .ID                       (ioctl_gpio_ext_porta[30]),
@@ -1794,17 +1398,6 @@ PAD_DIG_IO  x_PAD_GPIO_30 (
   .PAD                      (PAD_GPIO_30             )
 );
 
-
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_GPIO_31 (
   .ID                       (ioctl_gpio_ext_porta[31]),
   .IEN                      (pad_gpio_ien[31]        ),
@@ -1812,14 +1405,6 @@ PAD_DIG_IO  x_PAD_GPIO_31 (
   .OEN                      (pad_gpio_oen[31]        ),
   .PAD                      (PAD_GPIO_31             )
 );
-
-
-
-
-
-
-
-
 
 assign pwm_ioctl_ch0_ie_n = ~pwm_ioctl_ch0_oe_n;
 assign pwm_ioctl_ch1_ie_n = ~pwm_ioctl_ch1_oe_n;
@@ -1834,10 +1419,6 @@ assign pwm_ioctl_ch9_ie_n = ~pwm_ioctl_ch9_oe_n;
 assign pwm_ioctl_ch10_ie_n = ~pwm_ioctl_ch10_oe_n;
 assign pwm_ioctl_ch11_ie_n = ~pwm_ioctl_ch11_oe_n;
 
-
-
-
-
 PAD_DIG_IO  x_PAD_PWM_FAULT (
   .ID              (ioctl_pwm_fault),
   .IEN             (1'b0           ),
@@ -1845,15 +1426,6 @@ PAD_DIG_IO  x_PAD_PWM_FAULT (
   .OEN             (1'b1           ),
   .PAD             (PAD_PWM_FAULT  )
 );
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_PWM_CH0 (
   .ID                 (ioctl_pwm_cap0    ),
@@ -1863,15 +1435,6 @@ PAD_DIG_IO  x_PAD_PWM_CH0 (
   .PAD                (PAD_PWM_CH0       )
 );
 
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_PWM_CH1 (
   .ID                 (pwm_indata1       ),
   .IEN                (pwm_ioctl_ch1_ie_n),
@@ -1879,15 +1442,6 @@ PAD_DIG_IO  x_PAD_PWM_CH1 (
   .OEN                (pwm_ioctl_ch1_oe_n),
   .PAD                (PAD_PWM_CH1       )
 );
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_PWM_CH2 (
   .ID                 (ioctl_pwm_cap2    ),
@@ -1897,15 +1451,6 @@ PAD_DIG_IO  x_PAD_PWM_CH2 (
   .PAD                (PAD_PWM_CH2       )
 );
 
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_PWM_CH3 (
   .ID                 (pwm_indata3       ),
   .IEN                (pwm_ioctl_ch3_ie_n),
@@ -1913,15 +1458,6 @@ PAD_DIG_IO  x_PAD_PWM_CH3 (
   .OEN                (pwm_ioctl_ch3_oe_n),
   .PAD                (PAD_PWM_CH3       )
 );
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_PWM_CH4 (
   .ID                 (ioctl_pwm_cap4    ),
@@ -1931,15 +1467,6 @@ PAD_DIG_IO  x_PAD_PWM_CH4 (
   .PAD                (PAD_PWM_CH4       )
 );
 
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_PWM_CH5 (
   .ID                 (pwm_indata5       ),
   .IEN                (pwm_ioctl_ch5_ie_n),
@@ -1947,15 +1474,6 @@ PAD_DIG_IO  x_PAD_PWM_CH5 (
   .OEN                (pwm_ioctl_ch5_oe_n),
   .PAD                (PAD_PWM_CH5       )
 );
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_PWM_CH6 (
   .ID                 (ioctl_pwm_cap6    ),
@@ -1965,15 +1483,6 @@ PAD_DIG_IO  x_PAD_PWM_CH6 (
   .PAD                (PAD_PWM_CH6       )
 );
 
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_PWM_CH7 (
   .ID                 (pwm_indata7       ),
   .IEN                (pwm_ioctl_ch7_ie_n),
@@ -1981,16 +1490,6 @@ PAD_DIG_IO  x_PAD_PWM_CH7 (
   .OEN                (pwm_ioctl_ch7_oe_n),
   .PAD                (PAD_PWM_CH7       )
 );
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_PWM_CH8 (
   .ID                 (ioctl_pwm_cap8    ),
@@ -2000,15 +1499,6 @@ PAD_DIG_IO  x_PAD_PWM_CH8 (
   .PAD                (PAD_PWM_CH8       )
 );
 
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_PWM_CH9 (
   .ID                 (pwm_indata9       ),
   .IEN                (pwm_ioctl_ch9_ie_n),
@@ -2016,16 +1506,6 @@ PAD_DIG_IO  x_PAD_PWM_CH9 (
   .OEN                (pwm_ioctl_ch9_oe_n),
   .PAD                (PAD_PWM_CH9       )
 );
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_PWM_CH10 (
   .ID                  (ioctl_pwm_cap10    ),
@@ -2035,15 +1515,6 @@ PAD_DIG_IO  x_PAD_PWM_CH10 (
   .PAD                 (PAD_PWM_CH10       )
 );
 
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_PWM_CH11 (
   .ID                  (pwm_indata11       ),
   .IEN                 (pwm_ioctl_ch11_ie_n),
@@ -2051,24 +1522,6 @@ PAD_DIG_IO  x_PAD_PWM_CH11 (
   .OEN                 (pwm_ioctl_ch11_oe_n),
   .PAD                 (PAD_PWM_CH11       )
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_USI0_SCLK (
   .ID                   (ioctl_usi0_sclk_in  ),
@@ -2078,16 +1531,6 @@ PAD_DIG_IO  x_PAD_USI0_SCLK (
   .PAD                  (PAD_USI0_SCLK       )
 );
 
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_USI0_SD0 (
   .ID                  (ioctl_usi0_sd0_in  ),
   .IEN                 (usi0_ioctl_sd0_ie_n),
@@ -2095,16 +1538,6 @@ PAD_DIG_IO  x_PAD_USI0_SD0 (
   .OEN                 (usi0_ioctl_sd0_oe_n),
   .PAD                 (PAD_USI0_SD0       )
 );
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_USI0_SD1 (
   .ID                  (ioctl_usi0_sd1_in  ),
@@ -2114,16 +1547,6 @@ PAD_DIG_IO  x_PAD_USI0_SD1 (
   .PAD                 (PAD_USI0_SD1       )
 );
 
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_USI0_NSS (
   .ID                  (ioctl_usi0_nss_in  ),
   .IEN                 (usi0_ioctl_nss_ie_n),
@@ -2131,18 +1554,6 @@ PAD_DIG_IO  x_PAD_USI0_NSS (
   .OEN                 (usi0_ioctl_nss_oe_n),
   .PAD                 (PAD_USI0_NSS       )
 );
-
-
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_USI1_SCLK (
   .ID                   (ioctl_usi1_sclk_in  ),
@@ -2152,16 +1563,6 @@ PAD_DIG_IO  x_PAD_USI1_SCLK (
   .PAD                  (PAD_USI1_SCLK       )
 );
 
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_USI1_SD0 (
   .ID                  (ioctl_usi1_sd0_in  ),
   .IEN                 (usi1_ioctl_sd0_ie_n),
@@ -2169,16 +1570,6 @@ PAD_DIG_IO  x_PAD_USI1_SD0 (
   .OEN                 (usi1_ioctl_sd0_oe_n),
   .PAD                 (PAD_USI1_SD0       )
 );
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_USI1_SD1 (
   .ID                  (ioctl_usi1_sd1_in  ),
@@ -2188,16 +1579,6 @@ PAD_DIG_IO  x_PAD_USI1_SD1 (
   .PAD                 (PAD_USI1_SD1       )
 );
 
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_USI1_NSS (
   .ID                  (ioctl_usi1_nss_in  ),
   .IEN                 (usi1_ioctl_nss_ie_n),
@@ -2205,15 +1586,6 @@ PAD_DIG_IO  x_PAD_USI1_NSS (
   .OEN                 (usi1_ioctl_nss_oe_n),
   .PAD                 (PAD_USI1_NSS       )
 );
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_USI2_SCLK (
   .ID                   (ioctl_usi2_sclk_in  ),
@@ -2223,16 +1595,6 @@ PAD_DIG_IO  x_PAD_USI2_SCLK (
   .PAD                  (PAD_USI2_SCLK       )
 );
 
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_USI2_SD0 (
   .ID                  (ioctl_usi2_sd0_in  ),
   .IEN                 (usi2_ioctl_sd0_ie_n),
@@ -2240,16 +1602,6 @@ PAD_DIG_IO  x_PAD_USI2_SD0 (
   .OEN                 (usi2_ioctl_sd0_oe_n),
   .PAD                 (PAD_USI2_SD0       )
 );
-
-
-
-
-
-
-
-
-
-
 
 PAD_DIG_IO  x_PAD_USI2_SD1 (
   .ID                  (ioctl_usi2_sd1_in  ),
@@ -2259,16 +1611,6 @@ PAD_DIG_IO  x_PAD_USI2_SD1 (
   .PAD                 (PAD_USI2_SD1       )
 );
 
-
-
-
-
-
-
-
-
-
-
 PAD_DIG_IO  x_PAD_USI2_NSS (
   .ID                  (ioctl_usi2_nss_in  ),
   .IEN                 (usi2_ioctl_nss_ie_n),
@@ -2277,39 +1619,9 @@ PAD_DIG_IO  x_PAD_USI2_NSS (
   .PAD                 (PAD_USI2_NSS       )
 );
 
-
-
-
-
-
-
-
-
-
-
-
-
 assign bist0_mode = 1'b0;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 assign scan_en = 1'b0;
 assign scan_mode = 1'b0;
 assign test_mode = 1'b0;
 
-
-
 endmodule
-
-

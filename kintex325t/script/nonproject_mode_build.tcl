@@ -6,7 +6,7 @@
 
 puts "-------------------------- Start --------------------------"
 # Set the FPGA chip
-set xilinx_fpga_chip xc7a200tfbg484-2l
+set xilinx_fpga_chip xc7k325tffg676-2
 
 # Set the output path
 set  outputDir ./output

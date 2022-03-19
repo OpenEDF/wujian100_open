@@ -20,8 +20,9 @@ bit:
 	vivado -mode tcl -source script/nonproject_mode_build.tcl
 
 mcs:
+	vivado -mode tcl -source script/buildfile.tcl
 
 clean:
-	rm -rf rtl *.log *.pb xsim.dir *.html *.xml *.jou output .Xil *.txt 
+	rm -rf rtl *.log *.pb xsim.dir *.html *.xml *.jou output .Xil *.txt build
 
 #--------------------------------------------------------------------
