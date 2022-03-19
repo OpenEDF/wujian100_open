@@ -15,18 +15,17 @@
 #===========================================
 # Create clock
 #===========================================
-set_property -dict { PACKAGE_PIN G22 IOSTANDARD LVCMOS33 } [get_ports { PIN_EHS }];
-create_clock -add -name PIN_EHS -period 20.00 -waveform {0 10} [get_ports { PIN_EHS }];
-create_clock -add -name PIN_EHS -period 500.00 -waveform {0 250} [get_ports { PAD_JTAG_TCLK }];
-set_clock_groups -asynchronous -name {clkgroup_2} -group [get_clocks {CLKDIV PIN_EHS}]
-set_clock_groups -asynchronous -name {clkgroup_3} -group [get_clocks {PAD_JTAG_TCLK}]
-set_false_path -from [get_pins u_clk_wiz_0/inst/mmcm_adv_inst/CLKOUT0] -to [get_pins x_cpu_top/CPU/x_cr_tcipif_top/x_cr_coretim_top/refclk_ff1_reg/D]
+create_clock -period 10.000 -name PIN_EHS [get_ports PIN_EHS]
+create_clock -period 500.000 -name PAD_JTAG_TCLK [get_ports PAD_JTAG_TCLK]
 set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets PAD_JTAG_TCLK]
+set_false_path -from [get_pins u_clk_wiz_0/inst/mmcm_adv_inst/CLKOUT0] -to [get_pins x_cpu_top/CPU/x_cr_tcipif_top/x_cr_coretim_top/refclk_ff1_reg/D]
 
 #===========================================
 # Global reset source
 #===========================================
+set_property PACKAGE_PIN G22   [get_ports PIN_EHS]
 set_property PACKAGE_PIN D26   [get_ports PAD_MCURST];
+set_property PACKAGE_PIN M22   [get_ports SYS_CLK_TEST];
 
 #===========================================
 # C-SKY  JTAG interface: J8
@@ -95,8 +94,11 @@ set_property PACKAGE_PIN R23   [get_ports PAD_PWM_FAULT]
 # YOC SOCKET 4
 #===========================================
 set_property PACKAGE_PIN R20   [get_ports PAD_USI0_NSS]
-set_property PACKAGE_PIN R21   [get_ports PAD_USI0_SCLK]
-set_property PACKAGE_PIN P19   [get_ports PAD_USI0_SD0]
+#set_property PACKAGE_PIN R21   [get_ports PAD_USI0_SCLK]
+#set_property PACKAGE_PIN P19   [get_ports PAD_USI0_SD0]
+# SCLK TX; SD0 RX
+set_property PACKAGE_PIN A17   [get_ports PAD_USI0_SCLK]
+set_property PACKAGE_PIN B17   [get_ports PAD_USI0_SD0]
 set_property PACKAGE_PIN P21   [get_ports PAD_USI0_SD1]
 set_property PACKAGE_PIN P20   [get_ports PAD_USI1_NSS]
 set_property PACKAGE_PIN R25   [get_ports PAD_USI1_SCLK]
@@ -177,6 +179,7 @@ set_property IOSTANDARD LVCMOS33 [get_ports PAD_JTAG_TMS]
 set_property IOSTANDARD LVCMOS33 [get_ports PAD_MCURST]
 set_property IOSTANDARD LVCMOS33 [get_ports PIN_EHS]
 set_property IOSTANDARD LVCMOS33 [get_ports POUT_EHS]
+set_property IOSTANDARD LVCMOS33 [get_ports SYS_CLK_TEST]
 
 #===========================================
 # FPGA configuration properties
